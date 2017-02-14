@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+    	.yellow {
+    		background: yellow;
+    	}
+    </style>
+</head>
+   
+<body>
+    <input type="text" name="" id="text">
+    <button id="add">添加</button>
+    <button id="delete">删除</button>
+    <ul id="content"></ul>
+</body>
+<script type="text/javascript">
+var oText = document.getElementById('text');
+var oAdd = document.getElementById('add');
+var oDelete = document.getElementById('delete');
+var oContent = document.getElementById('content');
+oAdd.onclick = function() {
+	if (oText.value !== '') {  
+                    var li  = document.createElement('li');
+                    li.innerHTML = oText.value; 	
+                    li._index = true;  
+                    li.onclick = function(){
+                    	
+                    	if(this._index){
+                    	   this.className = 'yellow';	
+                    	   this._index = false;
+                    	}else {
+                    	   this.className= '';
+                    	    this._index= true;
+                    	}
+                    	
+                    };	
+                    oContent .appendChild(li);
+	}
+};
+oDelete.onclick = function(){
+	var oLi = document.getElementsByTagName('li');
+	for(var i =0;i<oLi.length;i++){
+                   if (oLi[i].className.indexOf('yellow')!= - 1) {
+                   	oContent.removeChild(oLi[i]);
+                   	i--;
+                   }
+	}
+};
+
+</script>
+
+</html>

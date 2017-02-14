@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>dom概念练习题</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	body{
+		color: #000;
+	}
+</style>
+</head>
+<body>
+     <input type="text" name="" id="msg"><input type="button" name="" value="留言"  id="submit">
+     <ul id="content"></ul>
+</body>
+<script type="text/javascript">
+     var  msg = document.getElementById('msg');
+     var  submit = document.getElementById('submit');
+     var oUl = document.getElementById('content');
+     submit.onclick = function (){
+     	if(msg.value == ''){
+     	       alert('请输入留言');
+     	}else {
+     		var li = document.createElement('li');
+     		li.innerHTML = msg.value;
+     		if(oUl.children.length<5){
+     			oUl.appendChild(li);
+     		}else {
+     			oUl.removeChild(oUl.children[0]);
+     			oUl.appendChild(li);
+     		}
+     	}
+     };
+</script>
+</html>

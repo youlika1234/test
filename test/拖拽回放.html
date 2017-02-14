@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+    <style type="text/css">
+    div {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        left: 0;
+    }
+    </style>
+</head>
+<body>
+    <input type="button" name="" value="回放" id="review">
+    <div id="div"></div>
+</body>
+    <script type="text/javascript">
+    var oInput = document.getElementById('review');
+    var oDiv = document.getElementById('div');
+    var timer =null;
+    drag(oDiv);
+    oInput.onclick = function(){
+    	
+    	var num =arr.length-1;
+         timer = setInterval(function(){
+              oDiv.style.left =arr[num][0]+'px';
+                oDiv.style.top = arr[num][1]+'px';
+                num--;
+                if(num ==0 ){
+                	clearInterval(timer);
+
+                }
+               
+         },30);
+    };
+    var  record = [];
+    	function drag(obj) {
+        obj.onmousedown = function(ev) {
+            var ev = ev || event;
+            var disX = ev.clientX - obj.offsetLeft;
+            var disY = ev.clientY - obj.offsetTop;
+
+            //为了解决移动过快失去焦点的的时候脱离div
+            document.onmousemove = function(ev) {
+                var ev = ev || event;
+                var L = ev.clientX-disX;
+                var T = ev.clientY-disY;
+                obj.style.left = L + 'px';
+                obj.style.top = T + 'px';
+                record.push([L,T]);
+            };
+            document.onmouseup = function() {
+                document.onmousemove = document.onmouseup = null;
+
+            };
+            return false;
+        };
+    }
+     var arr=record.reverse();
+     console.log(record);
+
+    </script>
+</html>

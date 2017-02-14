@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="#" rel="stylesheet">
+<style type="text/css">
+      #div1{
+      	width: 50px;
+      	height: 500px;
+      	position: absolute;
+      	background: black;
+      }
+      #div2{
+      	position: absolute;
+      	width: 50px;
+      	height: 50px;
+      	background: red;
+      }   
+</style>
+</head> 
+<body>
+       <div id="div1">
+       	<div  id="div2"></div>
+       </div>
+</body>
+<script type="text/javascript">
+	var oDiv1 = document.getElementById('div1');
+	var oDiv2 = document.getElementById('div2');
+	oDiv2.onmousedown = function(ev){
+		var ev = ev||event;
+		var disY = ev.clientY-this.offsetTop;
+		var max = oDiv1.offsetHeight - oDiv2.offsetHeight;
+		document.onmousemove=function(ev){
+                                        var ev = ev||event;
+                                        var T =ev.clientY-disY;
+                                        if(T<0){
+                                        	T= 0;
+                                        }else if(T>max){
+                                        	T = max;
+                                        }
+                                        oDiv2.style.top =T+'px'; 
+		};
+		document.onmouseup = function(){
+			document.onmousemove = document.onmouseup= null;
+		};
+		return false;
+	};
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+    div {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        left: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="div"></div>
+</body>
+<script type="text/javascript">
+var oDiv = document.getElementById('div');
+var timer = null;
+document.body.onkeydown = function(ev) { 
+    var ev = ev || event;
+
+   
+    if(ev.keyCode== 39 )
+    timer=setTimeout(function() {
+        oDiv.style.left =parseInt(getStyle(oDiv,'left'))+10+'px'; 
+    }, 10);
+ console.log(ev.keyCode);
+};
+document.body.onkeyup = function(){
+	clearTimeout(timer);
+};
+function getStyle(obj, attr) {
+    if (obj.currentStyle) {
+        return obj.currentStyle[attr];
+    } else {
+        return getComputedStyle(obj, false)[attr];
+    }
+}
+</script>
+
+</html>

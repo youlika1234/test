@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+    img {
+        filter: alpha(opacity: 30);
+        opacity: 0.3;
+    }
+    </style>
+</head>
+
+<body>
+    <img src="../image/123.jpg" alt="123" id="img">
+</body>
+<script type="text/javascript">
+var oImg = document.getElementById('img');
+var timer = null;
+var alpha = 30;
+
+oImg.onmouseover = function(){
+	doMove(this,100);
+};
+
+oImg.onmouseout = function(){
+	doMove(this,30);
+};
+function doMove(obj, target) {
+    clearInterval(timer);
+    timer = setInterval(function() {
+         var speed = 10;
+         speed = (target > alpha) ? speed : -speed;	
+        if (alpha ==target) {
+            clearInterval(timer);
+        } else {
+            alpha  += speed;
+            obj.style.filter = 'alpha(opacity:'+alpha+')';
+            obj.style.opacity = alpha/100;
+         }
+    }, 60);
+}
+</script>
+
+</html>

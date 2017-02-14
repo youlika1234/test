@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+    div {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        left: 0;
+    }
+    </style>
+</head>
+
+<body>
+    dsff f dfdf
+    <div id="div"></div>
+    <script type="text/javascript">
+    var oDiv = document.getElementById('div');
+  
+   drag(oDiv,200,200);
+    function drag(obj,disL,disT) {
+        obj.onmousedown = function(ev) {
+            var ev = ev || event;
+            var disX = ev.clientX - obj.offsetLeft;
+            var disY = ev.clientY - obj.offsetTop;
+            //解决图片默认拖拽行为
+            if (obj.setCapture) {
+                obj.setCaptrue();
+            }
+            //为了解决移动过快失去焦点的的时候脱离div
+            document.onmousemove = function(ev) {
+                var ev = ev || event;
+                var L = ev.clientX-disX;
+                var T = ev.clientY-disY;
+                if (L < disL) {
+                    L = 0;
+                } else if(L > document.documentElement.clientWidth - obj.offsetWidth){
+                    L = document.documentElement.clientWidth - obj.offsetWidth;
+                }
+                if (T < disT) {
+                    T = 0;
+                } else if(T > document.documentElement.clientHeight - obj.offsetHeight) {
+                    T = document.documentElement.clientHeight - obj.offsetHeight;
+                }
+                obj.style.left = L + 'px';
+                obj.style.top = T + 'px';
+            };
+            document.onmouseup = function() {
+                document.onmousemove = document.onmouseup = null;
+                //解决图片默认拖拽行为
+                obj.releaseCapture();
+            };
+            return false;
+        };
+    }
+    </script>
+</body>
+
+</html>

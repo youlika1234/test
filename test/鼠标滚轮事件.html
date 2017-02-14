@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	div{
+		width: 50px;
+		height: 50px;
+		background: red;
+	}
+</style>
+</head>
+<body>
+     <div id="div"></div>
+</body>
+<script type="text/javascript">
+	var oDiv = document.getElementById('div');
+	oDiv.onmousewheel = abc;
+	if(oDiv.addEventListener){
+		oDiv.addEventListener('DOMMouseScroll',abc,false);
+	}
+
+	function abc(ev){
+		var ev = ev||event;
+		var b=true;
+		if(ev.wheelDelta){
+			b = ev.wheelDelta>0?true:false;
+		}else {
+			b= ev.detail<0?true:false;
+		}
+
+		if(b){
+			this.style.height = this.offsetHeight + 10+'px';
+		}else {
+			this.style.height = this.offsetHeight - 10+'px';
+		}
+		return false;
+		ev.preventDeault();
+	}
+</script>
+</html>
