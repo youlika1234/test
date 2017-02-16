@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="#" rel="stylesheet">
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    li{
+        list-style: none;
+    }
+    li{
+        width: 180px;
+        height: 100px;
+        margin: 10px;
+        float: left;
+    }
+    li img{
+        width:100%;
+        height: 100%;
+        cursor: pointer;
+    }
+    ul{
+       width: 600px;
+       height: 360px;
+       border: 5px solid #999;
+       margin: 0 auto;
+    }
+    .clearFix:after{
+        content: "";
+        display: block;
+        clear: both;
+    }
+    </style>
+</head>
+ 
+<body>
+    <ul id="photo" class="clearFix">
+        <li><img src="image/01.png" alt=""></li>
+        <li><img src="image/02.png" alt=""></li>
+        <li><img src="image/03.png" alt=""></li>
+        <li><img src="image/04.png" alt=""></li>
+        <li><img src="image/05.png" alt=""></li>
+        <li><img src="image/06.png" alt=""></li>
+        <li><img src="image/07.png" alt=""></li>
+        <li><img src="image/08.png" alt=""></li>
+        <li><img src="image/09.png" alt=""></li>
+    </ul>
+</body>
+<script type="text/javascript">
+function getStyle(obj,attr){
+   if(obj.currentStyle){
+      return  obj.currentStyle[attr];
+   }else {
+      return window.getComputedStyle(obj,false)[attr];
+   }
+
+}
+
+function doMove(obj,json,fn) {
+    clearInterval(obj.timer);
+    obj.timer = setInterval(function() {
+       var stop = true;
+       for(var attr in json){
+         if(attr == 'opacity'){
+           var icur =  parseInt(parseFloat(getStyle(obj,attr))*100 );
+        }else {
+          var icur =parseInt(getStyle(obj,attr)) ;
+        }
+        
+        var speed = (json[attr] - icur) / 8;
+        speed = (json[attr] - icur) > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+        if(icur!=json[attr]){
+            stop =false; 
+        }
+            if(attr == 'opacity'){
+                  obj.style[attr] = (icur+ speed)/100;
+                  obj.style.filter= "alpha:(opacity:"+(icur+speed)+")";
+            }else{
+               obj.style[attr] = icur + speed + 'px';
+            } 
+       }   
+       if(stop){
+           clearInterval(obj.timer);
+           if(fn){
+              fn(); 
+           }
+       }
+    }, 30);
+}
+
+var aLi = document.getElementsByTagName('li');
+for(var i =0;i<aLi.length;i++){
+   aLi[i].style.left = aLi[i].offsetLeft+'px';
+   aLi[i].style.top  =  aLi[i].offsetTop+'px';
+}
+
+for(var j=0;j<aLi.length;j++){
+    aLi[j].style.position = 'absolute';
+    aLi[j].style.margin = 0;
+}
+
+var that=0;
+for(var k=0;k<aLi.length;k++){
+    aLi[k].onmouseover = function(){
+        doMove(this,{'width':240,'height':150,'marginLeft':-30,'marginTop':-30});
+        that++;
+        this.style.zIndex = that;
+    };
+    aLi[k].onmouseout = function(){
+        doMove(this,{'width':180,'height':100,'marginLeft':0,'marginTop':0});
+        that++;
+        this.style.zIndex = that;
+    };
+}
+</script>
+
+</html>
